@@ -6,8 +6,7 @@ import (
 )
 
 type Client struct {
-	ServicesClient           *media.MediaservicesClient
-	StreamingEndpointsClient *media.StreamingEndpointsClient
+	ServicesClient *media.MediaservicesClient
 	AssetsClient   *media.AssetsClient
 }
 
@@ -15,15 +14,11 @@ func NewClient(o *common.ClientOptions) *Client {
 	ServicesClient := media.NewMediaservicesClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
 	o.ConfigureClient(&ServicesClient.Client, o.ResourceManagerAuthorizer)
 
-	StreamingEndpointsClient := media.NewStreamingEndpointsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
-	o.ConfigureClient(&StreamingEndpointsClient.Client, o.ResourceManagerAuthorizer)
-  
-  AssetsClient := media.NewAssetsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
+	AssetsClient := media.NewAssetsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
 	o.ConfigureClient(&AssetsClient.Client, o.ResourceManagerAuthorizer)
 
 	return &Client{
-		ServicesClient:           &ServicesClient,
-		StreamingEndpointsClient: &StreamingEndpointsClient,
-    AssetsClient:   &AssetsClient,
+		ServicesClient: &ServicesClient,
+		AssetsClient:   &AssetsClient,
 	}
 }
