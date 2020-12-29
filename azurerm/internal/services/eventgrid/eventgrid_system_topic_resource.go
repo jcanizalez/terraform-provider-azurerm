@@ -6,16 +6,17 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/Azure/azure-sdk-for-go/services/preview/eventgrid/mgmt/2020-04-01-preview/eventgrid"
 	"github.com/hashicorp/go-azure-helpers/response"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
+	"github.com/jcanizalez/azure-sdk-for-go/services/preview/eventgrid/mgmt/2020-10-15-preview/eventgrid"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/azure"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/tf"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/clients"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/services/eventgrid/parse"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/tags"
 	azSchema "github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/tf/schema"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/tf/suppress"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/timeouts"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/utils"
 )
@@ -95,6 +96,35 @@ func resourceEventGridSystemTopic() *schema.Resource {
 				Computed: true,
 			},
 
+			"identity": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Computed: true,
+				MaxItems: 1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"principal_id": {
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+
+						"tenant_id": {
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+
+						"type": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: suppress.CaseDifference,
+							ValidateFunc: validation.StringInSlice([]string{
+								"SystemAssigned",
+							}, true),
+						},
+					},
+				},
+			},
+
 			"tags": tags.Schema(),
 		},
 	}
@@ -133,6 +163,10 @@ func resourceEventGridSystemTopicCreateUpdate(d *schema.ResourceData, meta inter
 			TopicType: &topicType,
 		},
 		Tags: tags.Expand(t),
+	}
+
+	if v, ok := d.GetOk("identity"); ok {
+		systemTopic.Identity = expandSystemTopicIdentity(v.([]interface{}))
 	}
 
 	log.Printf("[INFO] preparing arguments for AzureRM Event Grid System Topic creation with Properties: %+v.", systemTopic)
@@ -190,6 +224,7 @@ func resourceEventGridSystemTopicRead(d *schema.ResourceData, meta interface{}) 
 		d.Set("source_arm_resource_id", props.Source)
 		d.Set("topic_type", props.TopicType)
 		d.Set("metric_arm_resource_id", props.MetricResourceID)
+		d.Set("identity", flattenSystemTopicIdentity(props.Identity))
 	}
 
 	return tags.FlattenAndSet(d, resp.Tags)
@@ -221,4 +256,44 @@ func resourceEventGridSystemTopicDelete(d *schema.ResourceData, meta interface{}
 	}
 
 	return nil
+}
+
+func expandSystemTopicIdentity(input []interface{}) *eventgrid.IdentityInfo {
+	if len(input) == 0 {
+		return &eventgrid.IdentityInfo{
+			Type: eventgrid.IdentityTypeNone,
+		}
+	}
+
+	raw := input[0].(map[string]interface{})
+
+	identity := eventgrid.IdentityInfo{
+		Type: eventgrid.IdentityType(raw["type"].(string)),
+	}
+
+	return &identity
+}
+
+func flattenSystemTopicIdentity(input *eventgrid.IdentityInfo) []interface{} {
+	if input == nil || input.Type == eventgrid.IdentityTypeNone {
+		return []interface{}{}
+	}
+
+	principalID := ""
+	if input.PrincipalID != nil {
+		principalID = *input.PrincipalID
+	}
+
+	tenantID := ""
+	if input.TenantID != nil {
+		tenantID = *input.TenantID
+	}
+
+	return []interface{}{
+		map[string]interface{}{
+			"type":         string(input.Type),
+			"principal_id": principalID,
+			"tenant_id":    tenantID,
+		},
+	}
 }

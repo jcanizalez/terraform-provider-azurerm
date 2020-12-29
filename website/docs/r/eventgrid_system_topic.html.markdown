@@ -58,7 +58,16 @@ The following arguments are supported:
 
 ---
 
+* `identity` - (Optional) An `identity` block is documented below.
+
 * `tags` - (Optional) A mapping of tags which should be assigned to the Event Grid System Topic.
+---
+
+A `identity` block supports the following:
+
+* `type` - (Required) Specifies the type of Managed Service Identity that should be configured on this Event Grid System Topic. Currently only type `SystemAssigned` identity is supported. 
+
+---
 
 ## Attributes Reference
 
@@ -67,6 +76,15 @@ In addition to the Arguments listed above - the following Attributes are exporte
 * `id` - The ID of the Event Grid System Topic.
 
 * `metric_arm_resource_id` - The Metric ARM Resource ID of the Event Grid System Topic.
+
+* `identity` - An `identity` block as defined below.
+---
+
+An `identity` block exports the following:
+
+* `principal_id` - The Principal ID associated with this Managed Service Identity.
+
+* `tenant_id` - The Tenant ID associated with this Managed Service Identity.
 
 ## Timeouts
 
