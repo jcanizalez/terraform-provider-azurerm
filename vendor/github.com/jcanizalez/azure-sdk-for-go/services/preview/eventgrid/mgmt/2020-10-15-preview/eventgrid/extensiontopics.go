@@ -76,6 +76,7 @@ func (client ExtensionTopicsClient) Get(ctx context.Context, scope string) (resu
 	result, err = client.GetResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.ExtensionTopicsClient", "Get", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -87,7 +88,7 @@ func (client ExtensionTopicsClient) GetPreparer(ctx context.Context, scope strin
 		"scope": autorest.Encode("path", scope),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}

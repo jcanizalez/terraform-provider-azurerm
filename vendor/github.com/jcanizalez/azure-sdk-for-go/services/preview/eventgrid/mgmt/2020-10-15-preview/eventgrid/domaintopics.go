@@ -81,7 +81,7 @@ func (client DomainTopicsClient) CreateOrUpdatePreparer(ctx context.Context, res
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -158,7 +158,7 @@ func (client DomainTopicsClient) DeletePreparer(ctx context.Context, resourceGro
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -226,6 +226,7 @@ func (client DomainTopicsClient) Get(ctx context.Context, resourceGroupName stri
 	result, err = client.GetResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.DomainTopicsClient", "Get", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -240,7 +241,7 @@ func (client DomainTopicsClient) GetPreparer(ctx context.Context, resourceGroupN
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -311,6 +312,7 @@ func (client DomainTopicsClient) ListByDomain(ctx context.Context, resourceGroup
 	result.dtlr, err = client.ListByDomainResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.DomainTopicsClient", "ListByDomain", resp, "Failure responding to request")
+		return
 	}
 	if result.dtlr.hasNextLink() && result.dtlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
@@ -327,7 +329,7 @@ func (client DomainTopicsClient) ListByDomainPreparer(ctx context.Context, resou
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -381,6 +383,7 @@ func (client DomainTopicsClient) listByDomainNextResults(ctx context.Context, la
 	result, err = client.ListByDomainResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.DomainTopicsClient", "listByDomainNextResults", resp, "Failure responding to next results request")
+		return
 	}
 	return
 }

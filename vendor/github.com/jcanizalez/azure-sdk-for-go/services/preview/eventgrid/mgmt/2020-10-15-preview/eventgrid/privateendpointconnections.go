@@ -84,7 +84,7 @@ func (client PrivateEndpointConnectionsClient) DeletePreparer(ctx context.Contex
 		"subscriptionId":                autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -153,6 +153,7 @@ func (client PrivateEndpointConnectionsClient) Get(ctx context.Context, resource
 	result, err = client.GetResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PrivateEndpointConnectionsClient", "Get", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -168,7 +169,7 @@ func (client PrivateEndpointConnectionsClient) GetPreparer(ctx context.Context, 
 		"subscriptionId":                autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -240,6 +241,7 @@ func (client PrivateEndpointConnectionsClient) ListByResource(ctx context.Contex
 	result.peclr, err = client.ListByResourceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PrivateEndpointConnectionsClient", "ListByResource", resp, "Failure responding to request")
+		return
 	}
 	if result.peclr.hasNextLink() && result.peclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
@@ -257,7 +259,7 @@ func (client PrivateEndpointConnectionsClient) ListByResourcePreparer(ctx contex
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -311,6 +313,7 @@ func (client PrivateEndpointConnectionsClient) listByResourceNextResults(ctx con
 	result, err = client.ListByResourceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PrivateEndpointConnectionsClient", "listByResourceNextResults", resp, "Failure responding to next results request")
+		return
 	}
 	return
 }
@@ -374,7 +377,7 @@ func (client PrivateEndpointConnectionsClient) UpdatePreparer(ctx context.Contex
 		"subscriptionId":                autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}

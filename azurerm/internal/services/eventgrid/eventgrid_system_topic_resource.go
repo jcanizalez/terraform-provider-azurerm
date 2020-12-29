@@ -224,8 +224,9 @@ func resourceEventGridSystemTopicRead(d *schema.ResourceData, meta interface{}) 
 		d.Set("source_arm_resource_id", props.Source)
 		d.Set("topic_type", props.TopicType)
 		d.Set("metric_arm_resource_id", props.MetricResourceID)
-		d.Set("identity", flattenSystemTopicIdentity(props.Identity))
 	}
+
+	d.Set("identity", flattenSystemTopicIdentity(resp.Identity))
 
 	return tags.FlattenAndSet(d, resp.Tags)
 }
@@ -258,24 +259,24 @@ func resourceEventGridSystemTopicDelete(d *schema.ResourceData, meta interface{}
 	return nil
 }
 
-func expandSystemTopicIdentity(input []interface{}) *eventgrid.IdentityInfo {
+func expandSystemTopicIdentity(input []interface{}) *eventgrid.SystemTopicIdentity {
 	if len(input) == 0 {
-		return &eventgrid.IdentityInfo{
-			Type: eventgrid.IdentityTypeNone,
+		return &eventgrid.SystemTopicIdentity{
+			Type: eventgrid.ManagedIdentityTypeNone,
 		}
 	}
 
 	raw := input[0].(map[string]interface{})
 
-	identity := eventgrid.IdentityInfo{
-		Type: eventgrid.IdentityType(raw["type"].(string)),
+	identity := eventgrid.SystemTopicIdentity{
+		Type: eventgrid.ManagedIdentityType(raw["type"].(string)),
 	}
 
 	return &identity
 }
 
-func flattenSystemTopicIdentity(input *eventgrid.IdentityInfo) []interface{} {
-	if input == nil || input.Type == eventgrid.IdentityTypeNone {
+func flattenSystemTopicIdentity(input *eventgrid.SystemTopicIdentity) []interface{} {
+	if input == nil || input.Type == eventgrid.ManagedIdentityTypeNone {
 		return []interface{}{}
 	}
 

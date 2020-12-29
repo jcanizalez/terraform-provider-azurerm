@@ -26,7 +26,7 @@ import (
 
 const (
 	// DefaultBaseURI is the default URI used for the service Eventgrid
-	DefaultBaseURI = "https://management.azure.com"
+	DefaultBaseURI = "https://eastus2euap.management.azure.com"
 )
 
 // BaseClient is the base client for Eventgrid.

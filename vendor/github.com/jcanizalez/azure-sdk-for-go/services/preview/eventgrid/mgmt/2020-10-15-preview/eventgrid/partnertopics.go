@@ -72,6 +72,7 @@ func (client PartnerTopicsClient) Activate(ctx context.Context, resourceGroupNam
 	result, err = client.ActivateResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PartnerTopicsClient", "Activate", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -85,7 +86,7 @@ func (client PartnerTopicsClient) ActivatePreparer(ctx context.Context, resource
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -147,6 +148,7 @@ func (client PartnerTopicsClient) Deactivate(ctx context.Context, resourceGroupN
 	result, err = client.DeactivateResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PartnerTopicsClient", "Deactivate", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -160,7 +162,7 @@ func (client PartnerTopicsClient) DeactivatePreparer(ctx context.Context, resour
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -229,7 +231,7 @@ func (client PartnerTopicsClient) DeletePreparer(ctx context.Context, resourceGr
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -296,6 +298,7 @@ func (client PartnerTopicsClient) Get(ctx context.Context, resourceGroupName str
 	result, err = client.GetResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PartnerTopicsClient", "Get", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -309,7 +312,7 @@ func (client PartnerTopicsClient) GetPreparer(ctx context.Context, resourceGroup
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -379,6 +382,7 @@ func (client PartnerTopicsClient) ListByResourceGroup(ctx context.Context, resou
 	result.ptlr, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PartnerTopicsClient", "ListByResourceGroup", resp, "Failure responding to request")
+		return
 	}
 	if result.ptlr.hasNextLink() && result.ptlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
@@ -394,7 +398,7 @@ func (client PartnerTopicsClient) ListByResourceGroupPreparer(ctx context.Contex
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -448,6 +452,7 @@ func (client PartnerTopicsClient) listByResourceGroupNextResults(ctx context.Con
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PartnerTopicsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
+		return
 	}
 	return
 }
@@ -506,6 +511,7 @@ func (client PartnerTopicsClient) ListBySubscription(ctx context.Context, filter
 	result.ptlr, err = client.ListBySubscriptionResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PartnerTopicsClient", "ListBySubscription", resp, "Failure responding to request")
+		return
 	}
 	if result.ptlr.hasNextLink() && result.ptlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
@@ -520,7 +526,7 @@ func (client PartnerTopicsClient) ListBySubscriptionPreparer(ctx context.Context
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -574,6 +580,7 @@ func (client PartnerTopicsClient) listBySubscriptionNextResults(ctx context.Cont
 	result, err = client.ListBySubscriptionResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PartnerTopicsClient", "listBySubscriptionNextResults", resp, "Failure responding to next results request")
+		return
 	}
 	return
 }
@@ -626,6 +633,7 @@ func (client PartnerTopicsClient) Update(ctx context.Context, resourceGroupName 
 	result, err = client.UpdateResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.PartnerTopicsClient", "Update", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -639,7 +647,7 @@ func (client PartnerTopicsClient) UpdatePreparer(ctx context.Context, resourceGr
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}

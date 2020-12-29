@@ -129,6 +129,22 @@ func PossibleEventChannelProvisioningStateValues() []EventChannelProvisioningSta
 	return []EventChannelProvisioningState{EventChannelProvisioningStateCanceled, EventChannelProvisioningStateCreating, EventChannelProvisioningStateDeleting, EventChannelProvisioningStateFailed, EventChannelProvisioningStateSucceeded, EventChannelProvisioningStateUpdating}
 }
 
+
+// ManagedIdentityType enumerates the values for managed identity type.
+type ManagedIdentityType string
+
+const (
+	// ManagedIdentityTypeNone No managed identity.
+	ManagedIdentityTypeNone ManagedIdentityType = "None"
+	// ManagedIdentityTypeSystemAssigned A system-assigned managed identity.
+	ManagedIdentityTypeSystemAssigned ManagedIdentityType = "SystemAssigned"
+)
+
+// PossibleManagedIdentityTypeValues returns an array of possible values for the ManagedIdentityType const type.
+func PossibleManagedIdentityTypeValues() []ManagedIdentityType {
+	return []ManagedIdentityType{ManagedIdentityTypeNone, ManagedIdentityTypeSystemAssigned}
+}
+
 // EventDeliverySchema enumerates the values for event delivery schema.
 type EventDeliverySchema string
 

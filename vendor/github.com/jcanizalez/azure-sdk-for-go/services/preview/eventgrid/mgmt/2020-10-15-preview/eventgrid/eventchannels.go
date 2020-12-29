@@ -74,6 +74,7 @@ func (client EventChannelsClient) CreateOrUpdate(ctx context.Context, resourceGr
 	result, err = client.CreateOrUpdateResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.EventChannelsClient", "CreateOrUpdate", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -88,7 +89,7 @@ func (client EventChannelsClient) CreateOrUpdatePreparer(ctx context.Context, re
 		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -161,7 +162,7 @@ func (client EventChannelsClient) DeletePreparer(ctx context.Context, resourceGr
 		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -229,6 +230,7 @@ func (client EventChannelsClient) Get(ctx context.Context, resourceGroupName str
 	result, err = client.GetResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.EventChannelsClient", "Get", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -243,7 +245,7 @@ func (client EventChannelsClient) GetPreparer(ctx context.Context, resourceGroup
 		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -314,6 +316,7 @@ func (client EventChannelsClient) ListByPartnerNamespace(ctx context.Context, re
 	result.eclr, err = client.ListByPartnerNamespaceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.EventChannelsClient", "ListByPartnerNamespace", resp, "Failure responding to request")
+		return
 	}
 	if result.eclr.hasNextLink() && result.eclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
@@ -330,7 +333,7 @@ func (client EventChannelsClient) ListByPartnerNamespacePreparer(ctx context.Con
 		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -384,6 +387,7 @@ func (client EventChannelsClient) listByPartnerNamespaceNextResults(ctx context.
 	result, err = client.ListByPartnerNamespaceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.EventChannelsClient", "listByPartnerNamespaceNextResults", resp, "Failure responding to next results request")
+		return
 	}
 	return
 }

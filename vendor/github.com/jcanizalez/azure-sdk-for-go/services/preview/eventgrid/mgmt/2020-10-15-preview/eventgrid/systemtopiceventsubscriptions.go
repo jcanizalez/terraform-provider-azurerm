@@ -85,7 +85,7 @@ func (client SystemTopicEventSubscriptionsClient) CreateOrUpdatePreparer(ctx con
 		"systemTopicName":       autorest.Encode("path", systemTopicName),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -165,7 +165,7 @@ func (client SystemTopicEventSubscriptionsClient) DeletePreparer(ctx context.Con
 		"systemTopicName":       autorest.Encode("path", systemTopicName),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -234,6 +234,7 @@ func (client SystemTopicEventSubscriptionsClient) Get(ctx context.Context, resou
 	result, err = client.GetResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.SystemTopicEventSubscriptionsClient", "Get", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -248,7 +249,7 @@ func (client SystemTopicEventSubscriptionsClient) GetPreparer(ctx context.Contex
 		"systemTopicName":       autorest.Encode("path", systemTopicName),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -312,6 +313,7 @@ func (client SystemTopicEventSubscriptionsClient) GetFullURL(ctx context.Context
 	result, err = client.GetFullURLResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.SystemTopicEventSubscriptionsClient", "GetFullURL", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -326,7 +328,7 @@ func (client SystemTopicEventSubscriptionsClient) GetFullURLPreparer(ctx context
 		"systemTopicName":       autorest.Encode("path", systemTopicName),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -397,6 +399,7 @@ func (client SystemTopicEventSubscriptionsClient) ListBySystemTopic(ctx context.
 	result.eslr, err = client.ListBySystemTopicResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.SystemTopicEventSubscriptionsClient", "ListBySystemTopic", resp, "Failure responding to request")
+		return
 	}
 	if result.eslr.hasNextLink() && result.eslr.IsEmpty() {
 		err = result.NextWithContext(ctx)
@@ -413,7 +416,7 @@ func (client SystemTopicEventSubscriptionsClient) ListBySystemTopicPreparer(ctx 
 		"systemTopicName":   autorest.Encode("path", systemTopicName),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -467,6 +470,7 @@ func (client SystemTopicEventSubscriptionsClient) listBySystemTopicNextResults(c
 	result, err = client.ListBySystemTopicResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.SystemTopicEventSubscriptionsClient", "listBySystemTopicNextResults", resp, "Failure responding to next results request")
+		return
 	}
 	return
 }
@@ -529,7 +533,7 @@ func (client SystemTopicEventSubscriptionsClient) UpdatePreparer(ctx context.Con
 		"systemTopicName":       autorest.Encode("path", systemTopicName),
 	}
 
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}

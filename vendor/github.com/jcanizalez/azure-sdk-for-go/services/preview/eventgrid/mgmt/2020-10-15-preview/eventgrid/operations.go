@@ -69,6 +69,7 @@ func (client OperationsClient) List(ctx context.Context) (result OperationsListR
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "eventgrid.OperationsClient", "List", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -76,7 +77,7 @@ func (client OperationsClient) List(ctx context.Context) (result OperationsListR
 
 // ListPreparer prepares the List request.
 func (client OperationsClient) ListPreparer(ctx context.Context) (*http.Request, error) {
-	const APIVersion = "2020-04-01-preview"
+	const APIVersion = "2020-10-15-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
