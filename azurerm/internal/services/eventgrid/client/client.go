@@ -1,7 +1,8 @@
 package client
 
 import (
-	"github.com/jcanizalez/azure-sdk-for-go/services/preview/eventgrid/mgmt/2020-10-15-preview/eventgrid"
+	"github.com/Azure/azure-sdk-for-go/services/preview/eventgrid/mgmt/2020-04-01-preview/eventgrid"
+	preview "github.com/jcanizalez/azure-sdk-for-go/services/preview/eventgrid/mgmt/2020-10-15-preview/eventgrid"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/common"
 )
 
@@ -10,7 +11,7 @@ type Client struct {
 	DomainTopicsClient                  *eventgrid.DomainTopicsClient
 	EventSubscriptionsClient            *eventgrid.EventSubscriptionsClient
 	TopicsClient                        *eventgrid.TopicsClient
-	SystemTopicsClient                  *eventgrid.SystemTopicsClient
+	SystemTopicsClient                  *preview.SystemTopicsClient
 	SystemTopicEventSubscriptionsClient *eventgrid.SystemTopicEventSubscriptionsClient
 }
 
@@ -27,7 +28,7 @@ func NewClient(o *common.ClientOptions) *Client {
 	TopicsClient := eventgrid.NewTopicsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
 	o.ConfigureClient(&TopicsClient.Client, o.ResourceManagerAuthorizer)
 
-	SystemTopicsClient := eventgrid.NewSystemTopicsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
+	SystemTopicsClient := preview.NewSystemTopicsClient(o.SubscriptionId)
 	o.ConfigureClient(&SystemTopicsClient.Client, o.ResourceManagerAuthorizer)
 
 	SystemTopicEventSubscriptionsClient := eventgrid.NewSystemTopicEventSubscriptionsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
